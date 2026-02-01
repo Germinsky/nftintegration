@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAccount, useWriteContract, useReadContract } from 'wagmi';
 import { parseAbi } from 'viem';
 import { Music, Download, ExternalLink, Award, CheckCircle2 } from 'lucide-react';
+import NFTMintButton from './NFTMintButton';
 import './SongList.css';
 
 const REWARDS_ABI = parseAbi([
@@ -164,6 +165,14 @@ function SongCard({
               'Claim PROPH'
             )}
           </button>
+
+          {/* NFT Mint Button - unlocked after listening */}
+          <NFTMintButton
+            songTitle={song.title}
+            trackCompleted={listened}
+            requiresTrackPlay={true}
+            mintPrice="0" // Free mint, or set a price like "0.001"
+          />
 
           <div className="secondary-actions">
             {song.downloadUrl && (
